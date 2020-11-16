@@ -25,13 +25,14 @@ resource "google_storage_bucket" "mirror" {
   labels        = local.tags
 }
 
-# Make sure all objects are public - you can lock this down
+# Make sure all objects are public, Demo only - you can lock this down if you like
 resource "google_storage_bucket_iam_member" "mirror-public" {
   bucket = google_storage_bucket.mirror.name
   role   = "roles/storage.objectViewer"
   member = "allUsers"
 }
 
+# Loop through the mirror directory and upload it as-is to the bucket
 resource "google_storage_bucket_object" "mirror_objects" {
   for_each = fileset(local.mirror_directory, "**")
 
@@ -43,6 +44,7 @@ resource "google_storage_bucket_object" "mirror_objects" {
   content_type = replace(each.value, ".json", "") != each.value ? "application/json" : ""
 }
 
+# Output the url needed in the Terraform CLI config
 output "terraform-mirror-url" {
   value = format("https://storage.googleapis.com/%s/", google_storage_bucket.mirror.name)
 }

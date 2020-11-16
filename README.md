@@ -38,11 +38,11 @@ Run the command, it will look something like this:
 
 > Note: Not all providers are in the hashicorp namespace.
 
-### Run the Terraform for the S3 Bucket and objects
+### Run the Terraform for one of the clouds
 
-Create the S3 bucket and populate it with all the files generated in the previous step.
+`cd` into either of the ["aws", "azure", "gcp"] folders to create a bucket and populate it with all the files generated in the previous step.
 
-Open up `main.tf` and update the locals block to acceptable values, ensuring your S3 bucket has a unique name.
+Open up `main.tf` and update the locals block to acceptable values, ensuring your bucketname has a unique name.
 
 Apply the terraform with a `terraform apply`.
 

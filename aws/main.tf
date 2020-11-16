@@ -1,7 +1,7 @@
 locals {
   aws_region       = "us-west-1"
-  s3_bucket_name   = "tstraub-test-network-provider"
-  mirror_directory = "./mirror"
+  s3_bucket_name   = "tstraub-network-mirror"
+  mirror_directory = "../mirror"
 
   tags = {
     owner = "straub"

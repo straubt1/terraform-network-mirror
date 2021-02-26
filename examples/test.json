@@ -1,4 +1,9 @@
 {
+    "core": [
+        "0.14.7",
+        "0.13.6",
+        "0.11.14"
+    ],
     "providers": [{
             "namespace": "getstackhead",
             "name": "acme",

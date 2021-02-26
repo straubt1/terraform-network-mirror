@@ -30,3 +30,5 @@ override.tf.json
 
 mirror/
 test/
+.terraform.lock.hcl
+.DS_Store

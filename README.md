@@ -72,7 +72,9 @@ Run the command, it will look something like this:
 
 Open up `main.tf` and update the locals block to acceptable values, ensuring your bucketname has a unique name.
 
-Apply the terraform with a `terraform apply`.
+For simplicity, export environment variables for the provider credentials.
+
+Apply the terraform by first running `terraform init` and then `terraform apply`.
 
 You should end up with something like this at the end:
 

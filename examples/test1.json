@@ -1,0 +1,32 @@
+{
+    "core": [
+        "0.14.7",
+        "0.13.6"
+    ],
+    "providers": [
+	{
+            "namespace": "vmware",
+            "name": "vra7",
+            "versions": [
+                "3.0.4",
+                "3.0.3"
+            ]
+        },
+	{
+            "namespace": "hashicorp",
+            "name": "vault",
+            "versions": [
+                "3.3.1",
+                "3.3.0"
+            ]
+        },
+	{
+            "namespace": "hashicorp",
+            "name": "null",
+            "versions": [
+                "3.1.0",
+                "3.0.0"
+            ]
+        }
+    ]
+}

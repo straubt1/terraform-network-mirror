@@ -64,13 +64,11 @@ Run the command, it will look something like this:
 ./create-core.sh examples/test.json
 ```
 
-In case you want all versions is hosted by you mirror site.
-
-you can run following command
+sync provider versions with hashicorp:
+`./sync_version_with_hashicorp.sh <namespace> <provider_name>`
+`./create-mirror.sh ./<namespace>-<provider_name>.json`
+for example, you can run following command
 ```sh
-./sync_version_with_hashicorp.sh <namespace> <provider_name>
-./create-mirror.sh ./<namespace>-<provider_name>.json
-for example
 ./sync_version_with_hashicorp.sh hashicorp random
 ./create-mirror.sh ./hashicorp-random.json
 ```

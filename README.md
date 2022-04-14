@@ -64,9 +64,9 @@ Run the command, it will look something like this:
 ./create-core.sh examples/test.json
 ```
 
-sync provider versions with hashicorp:
+### sync provider versions with hashicorp:
 ```sh
-./sync_version_with_hashicorp.sh hashicorp random
+./generate_settings_from_registry.sh hashicorp random
 ./create-mirror.sh ./hashicorp-random.json
 ```
 

@@ -64,6 +64,12 @@ Run the command, it will look something like this:
 ./create-core.sh examples/test.json
 ```
 
+### sync provider versions with hashicorp:
+```sh
+./generate_settings_from_registry.sh hashicorp random
+./create-mirror.sh ./hashicorp-random.json
+```
+
 > Note: This configuration can live in the same file as the providers above.
 
 ### Run the Terraform for one of the clouds

@@ -2,13 +2,12 @@
 
 set -e -u -o pipefail
 
-[[ $# -eq 0 ]] && echo "Please Pass a Settings File Path" && exit 1
+[[ $# -eq 0 ]] && echo "Please Pass a Settings File Path and Mirror dir" && exit 1
 
 settings_file=$1
+mirror_dir=$2
 
-platform="linux_amd64"
-# platform="darwin_amd64" # if you want to test from a mac
-mirror_dir="./mirror"
+platforms=("linux_amd64" "darwin_amd64" "windows_amd64" "darwin_arm64")
 working_dir=$(pwd)
 mkdir -p ${mirror_dir}
 
@@ -17,7 +16,6 @@ download_provider(){
   local provider_name=$2
   local provider_version=$3
 
-  echo "Downloading Terraform Provider ${provider_namespace}/${provider_name}:${provider_version}"
   cat > main.tf << EOF
 terraform {
   required_providers {
@@ -28,8 +26,17 @@ terraform {
   }
 }
 EOF
-  terraform providers mirror -platform=${platform} ./
-  rm main.tf
+  for platform in ${platforms[@]};
+  do
+    if grep -iq "${platform}" "registry.terraform.io/${provider_namespace}/${provider_name}/${provider_version}.json"
+    then
+      echo "${provider_namespace}/${provider_name}:${provider_version} ${platform} has been downloaded."
+    else
+      echo "Downloading Terraform Provider ${provider_namespace}/${provider_name}:${provider_version} ${platform}"
+      terraform providers mirror -platform=${platform} ./
+    fi
+  done
+  rm -rf main.tf
 }
 
 settings_json=$(cat ${settings_file})
@@ -60,6 +67,6 @@ for row in $(echo ${providers} | jq -r '.[] | [.namespace, .name, .versions] | @
     n=$(_name)
     v=${version}
 
-    download_provider $ns $n $v
+    download_provider $ns $n $v || true
   done
 done
